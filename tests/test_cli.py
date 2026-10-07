@@ -141,5 +141,11 @@ class TestCLI(unittest.TestCase):
         self.assertNotEqual(r.returncode, 0)
 
 
+    def test_negative_index(self):
+        # 负数下标按 Python 语义取倒数第 N 个
+        obj = {"a": {"b": [{"c": 1}, {"c": 2}]}}
+        self.assertEqual(get_path(obj, "a.b.-1.c"), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
