@@ -60,3 +60,9 @@ $ python -m jtool validate broken.json
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+## 常见问题
+
+- **中文会被转义成 \uXXXX 吗？** 不会，输出统一用 `ensure_ascii=False`，中文直接显示。
+- **get 的路径怎么写？** 点分隔，数字段表示列表下标，比如 `servers.0.host`。
+- **大文件能处理吗？** 一次性读入内存，几十 MB 没问题，更大的建议用 jq。
