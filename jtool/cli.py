@@ -67,7 +67,7 @@ def fmt_value(value):
 
 def cmd_fmt(args):
     obj = parse(read_text(args.file))
-    print(json.dumps(obj, ensure_ascii=False, indent=args.indent))
+    print(json.dumps(obj, ensure_ascii=False, indent=args.indent, sort_keys=args.sort_keys))
 
 
 def cmd_get(args):
@@ -107,6 +107,7 @@ def build_parser():
     f = sub.add_parser("fmt", help="格式化输出 JSON")
     f.add_argument("file", nargs="?", help="JSON 文件，不传则从 stdin 读")
     f.add_argument("--indent", type=int, default=2, help="缩进空格数（默认 2）")
+    f.add_argument("--sort-keys", action="store_true", help="按 key 排序输出")
     f.set_defaults(func=cmd_fmt)
 
     g = sub.add_parser("get", help="按点路径取值，如 a.b.0")
