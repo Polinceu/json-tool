@@ -147,5 +147,24 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(get_path(obj, "a.b.-1.c"), 2)
 
 
+    def test_get_empty_path_raises(self):
+        with self.assertRaises(KeyError):
+            get_path({"a": 1}, "")
+
+    def test_fmt_indent_zero(self):
+        r = self.run_jtool("fmt", "--indent", "0", input_text='{"a": 1}')
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertIn('"a": 1', r.stdout)
+
+    def test_validate_empty_stdin_fails(self):
+        r = self.run_jtool("validate", input_text="")
+        self.assertNotEqual(r.returncode, 0)
+
+    def test_keys_empty_object(self):
+        r = self.run_jtool("keys", input_text="{}")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(r.stdout.strip(), "")
+
+
 if __name__ == "__main__":
     unittest.main()
