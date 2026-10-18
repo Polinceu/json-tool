@@ -66,3 +66,8 @@ python -m unittest discover -s tests -v
 - **中文会被转义成 \uXXXX 吗？** 不会，输出统一用 `ensure_ascii=False`，中文直接显示。
 - **get 的路径怎么写？** 点分隔，数字段表示列表下标，比如 `servers.0.host`。
 - **大文件能处理吗？** 一次性读入内存，几十 MB 没问题，更大的建议用 jq。
+
+## 和 jq 的区别
+
+- **零依赖**：只用标准库，装了 Python 3 就能跑，不用额外安装。
+- **功能精简**：只覆盖 fmt/get/keys/validate 四个常用操作，复杂查询还是 jq 更合适。
