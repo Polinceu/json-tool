@@ -166,5 +166,11 @@ class TestCLI(unittest.TestCase):
         self.assertEqual(r.stdout.strip(), "")
 
 
+    def test_fmt_sort_keys(self):
+        r = self.run_jtool("fmt", "--sort-keys", input_text='{"b":1,"a":2}')
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertLess(r.stdout.index('"a"'), r.stdout.index('"b"'))
+
+
 if __name__ == "__main__":
     unittest.main()
